@@ -7,5 +7,6 @@ interface CustomList : Iterable<Int> {
     fun addFirst(element: Int)
     fun remove(element: Int): Boolean
     fun indexOf(element: Int): Int
+    fun contains(element: Int): Boolean
     val size: Int
 }
