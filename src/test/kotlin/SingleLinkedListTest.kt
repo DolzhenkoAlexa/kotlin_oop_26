@@ -84,7 +84,8 @@ class SingleLinkedListTest {
             list[5]
         }
     }
-
+    
+    @Test
     fun `indexOf works`() {
         list.add(10)
         list.add(20)
@@ -92,7 +93,8 @@ class SingleLinkedListTest {
 
         assertEquals(2, list.indexOf(20))
     }
-
+    
+    @Test
     fun `set works`() {
         list.add(10)
         list.add(20)
