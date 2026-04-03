@@ -103,4 +103,33 @@ class SingleLinkedListTest {
         list[2] = 5
         assertEquals(5, list[2])
     }
+
+    @Test
+    fun `addFirst on empty list works`() {
+        list.addFirst(420)
+        assertEquals(1, list.size)
+        assertEquals(420, list[0])
+    }
+
+    @Test
+    fun `remove element from beginning`() {
+        list.add(10)
+        list.add(20)
+        list.add(30)
+    
+        list.remove(10)
+    
+        assertEquals(2, list.size)
+        assertEquals(20, list[0])
+        assertEquals(30, list[1])
+    }
+
+    @Test
+    fun `indexOf returns -1`() {
+        list.add(1)
+        list.add(2)
+        list.add(3)
+    
+        assertEquals(-1, list.indexOf(99))
+    }
 }
