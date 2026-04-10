@@ -1,5 +1,4 @@
 package org.example.list
-import org.example.CustomList
 
 class CustomArrayList(startSize: Int = 10) : CustomList {
     private var inner = IntArray(startSize)
