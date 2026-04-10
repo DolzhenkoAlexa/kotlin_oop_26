@@ -90,8 +90,8 @@ class SingleLinkedListTest {
         list.add(10)
         list.add(20)
         list.add(30)
-
-        assertEquals(2, list.indexOf(20))
+        // Поменяла индекс, так как в котлине индексы с нуля
+        assertEquals(1, list.indexOf(20))
     }
 
     @Test
