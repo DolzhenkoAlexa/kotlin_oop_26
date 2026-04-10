@@ -1,47 +1,125 @@
 package org.example.list
 
-class SingleLinkedList : CustomList {
-    // don't use any java/kotlin internal datastructures like lists))
-    // write from scratch))
+open class SingleLinkedList : CustomList {
 
+    private var firstNode: Node? = null
+    override var size: Int = 0
 
-    override val size: Int
-        get() = TODO("Implement this")
+    private class Node(
+        var value: Int,
+        var nextNode: Node? = null
+    )
 
     override fun add(element: Int) {
-        TODO("Implement this")
+        if (firstNode == null) {
+            firstNode = Node(element)
+        } else {
+            var currentNode = firstNode
+            while (currentNode?.nextNode != null) {
+                currentNode = currentNode.nextNode
+            }
+            currentNode?.nextNode = Node(element)
+        }
+        size++
     }
 
-    override operator fun set(index: Int, value: Int) {
-        TODO("Implement this")
+    override fun set(index: Int, value: Int) {
+        checkIndex(index)
+        var currentNode = firstNode
+        var currentIndex = 0
+        while (currentNode != null && currentIndex < index) {
+            currentNode = currentNode.nextNode
+            currentIndex++
+        }
+        currentNode?.let { it.value = value }
     }
 
     override fun addFirst(element: Int) {
-        TODO("Implement this")
+        val newNode = Node(element)
+        newNode.nextNode = firstNode
+        firstNode = newNode
+        size++
     }
 
-    override operator fun get(index: Int): Int {
-        TODO("Implement this")
+    override fun get(index: Int): Int {
+        checkIndex(index)
+        var currentNode = firstNode
+        var currentIndex = 0
+        while (currentNode != null && currentIndex < index) {
+            currentNode = currentNode.nextNode
+            currentIndex++
+        }
+        return currentNode?.value ?: throw IndexOutOfBoundsException()
     }
 
     override fun indexOf(element: Int): Int {
-        TODO("Implement this")
+        var currentNode = firstNode
+        var currentPosition = 0
+        while (currentNode != null) {
+            if (currentNode.value == element) {
+                return currentPosition
+            }
+            currentNode = currentNode.nextNode
+            currentPosition++
+        }
+        return -1
     }
 
     override fun remove(element: Int): Boolean {
-        TODO("Implement this")
+        if (firstNode == null) return false
+
+        if (firstNode?.value == element) {
+            firstNode = firstNode?.nextNode
+            size--
+            return true
+        }
+
+        var currentNode = firstNode
+        while (currentNode?.nextNode != null) {
+            if (currentNode.nextNode?.value == element) {
+                currentNode.nextNode = currentNode.nextNode?.nextNode
+                size--
+                return true
+            }
+            currentNode = currentNode.nextNode
+        }
+        return false
     }
 
     override fun iterator(): Iterator<Int> {
         return object : Iterator<Int> {
+            private var currentNode = firstNode
+
             override fun hasNext(): Boolean {
-                TODO("Implement this")
+                return currentNode != null
             }
 
             override fun next(): Int {
-                TODO("Implement this")
+                if (!hasNext()) throw NoSuchElementException()
+                val value = currentNode?.value ?: throw NoSuchElementException()
+                currentNode = currentNode?.nextNode
+                return value
             }
         }
+    }
+
+    // Для проверки ошибок
+    private fun checkIndex(index: Int) {
+        if (index < 0 || index >= size) {
+            throw IndexOutOfBoundsException("Index: $index, Size: $size")
+        }
+    }
+
+    // Для тестов
+    override fun contains(element: Int): Boolean {
+        var currentNode = firstNode
+        while (currentNode != null) {
+            if (currentNode.value == element) {
+                return true
+            }
+            currentNode = currentNode.nextNode
+        }
+        return false
     }
 
     companion object {
