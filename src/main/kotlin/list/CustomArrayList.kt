@@ -7,12 +7,16 @@ class CustomArrayList(startSize: Int = 10) : CustomList {
         private set
 
     override fun get(index: Int): Int {
-        if (index < 0 || index >= size) throw IndexOutOfBoundsException("Error: index < 0 or index >= size")
+        if (index < 0 || index >= size) {
+            throw IndexOutOfBoundsException("Error: index < 0 or index >= size")
+        }
         return inner[index]
     }
 
     override fun set(index: Int, value: Int) {
-        if (index < 0 || index >= size) throw IndexOutOfBoundsException("Error: index < 0 or index >= size")
+        if (index < 0 || index >= size) {
+            throw IndexOutOfBoundsException("Error: index < 0 or index >= size")
+        }
         inner[index] = value
     }
 
