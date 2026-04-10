@@ -1,7 +1,7 @@
 package org.example.stack
 
 import org.example.list.CustomArrayList
-import org.example.Stack
+// import org.example.Stack
 import java.util.NoSuchElementException
 
 class ArrayListStack : Stack {
